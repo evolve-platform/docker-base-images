@@ -6,3 +6,5 @@ RUN apt-get update -y && \
     apt-get install -y --no-install-recommends ca-certificates dumb-init curl && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN npm install -g corepack@0.31.0 && corepack enable pnpm
