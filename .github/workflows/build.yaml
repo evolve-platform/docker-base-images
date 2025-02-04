@@ -3,7 +3,7 @@ name: Sync Node base image to GitHub Container Registry
 on:
   workflow_dispatch:
   schedule:
-    - cron: '* * * * 0' # Every monday
+    - cron: "* * * * 0" # Every monday
 
 permissions:
   packages: write
@@ -27,10 +27,8 @@ jobs:
             TAG_VERSION: "22.13"
           - BASE_IMAGE: "node:22.12-bookworm-slim"
             TAG_VERSION: "22.12"
-          - BASE_IMAGE: "node:20.17-bookworm-slim"
-            TAG_VERSION: "20.17"
-          - BASE_IMAGE: "node:20.9-bookworm-slim"
-            TAG_VERSION: "20.9"
+          - BASE_IMAGE: "node:20.18-bookworm-slim"
+            TAG_VERSION: "20.18"
 
     steps:
       - name: Checkout code
