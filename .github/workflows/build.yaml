@@ -45,6 +45,8 @@ jobs:
             TAG_VERSION: "22.13"
           - BASE_IMAGE: "node:22.12-bookworm-slim"
             TAG_VERSION: "22.12"
+          - BASE_IMAGE: "node:20.20-bookworm-slim"
+            TAG_VERSION: "20.20"
           - BASE_IMAGE: "node:20.18-bookworm-slim"
             TAG_VERSION: "20.18"
           - BASE_IMAGE: "node:20.12-bookworm-slim"
