@@ -21,8 +21,10 @@ jobs:
     strategy:
       matrix:
         include:
-          - BASE_IMAGE: "node:24.13-bookworm-slim"
+          - BASE_IMAGE: "node:24-bookworm-slim"
             TAG_VERSION: "24"
+          - BASE_IMAGE: "node:24.14-bookworm-slim"
+            TAG_VERSION: "24.14"
           - BASE_IMAGE: "node:24.13-bookworm-slim"
             TAG_VERSION: "24.13"
           - BASE_IMAGE: "node:24.11.1-bookworm-slim"
@@ -35,7 +37,7 @@ jobs:
             TAG_VERSION: "24.1"
           - BASE_IMAGE: "node:24.0-bookworm-slim"
             TAG_VERSION: "24.0"
-          - BASE_IMAGE: "node:22.22-bookworm-slim"
+          - BASE_IMAGE: "node:22-bookworm-slim"
             TAG_VERSION: "22"
           - BASE_IMAGE: "node:22.22-bookworm-slim"
             TAG_VERSION: "22.22"
