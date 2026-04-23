@@ -7,8 +7,8 @@ on:
         type: boolean
         description: Whether to perform a dry run
         default: false
-  #schedule:
-  #  - cron: '8 0 * * *'
+  schedule:
+    - cron: "0 8 * * 0" # Every Sunday at 08:00 UTC
 
 permissions:
   packages: write
@@ -26,6 +26,6 @@ jobs:
         with:
           account: ${{ github.repository_owner }}
           token: ${{ secrets.GITHUB_TOKEN }}
-          image-names: ghcr.io/${{ github.repository_owner }}/node
+          image-names: node
           cut-off: 4w
-          dry-run: ${{ github.event.inputs.dry-run }}
+          dry-run: ${{ github.event.inputs.dry-run || 'false' }}
