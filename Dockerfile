@@ -2,7 +2,7 @@ ARG BASE_IMAGE=node:24-bookworm-slim
 
 FROM $BASE_IMAGE
 
-LABEL org.opencontainers.image.source="https://github.com/anthropic/docker-base-images"
+LABEL org.opencontainers.image.source="https://github.com/labdigital-evolve/docker-base-images/"
 LABEL org.opencontainers.image.description="Custom Node.js base image with pnpm support"
 
 RUN apt-get update -y && \
