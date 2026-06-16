@@ -22,6 +22,10 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          - BASE_IMAGE: "node:26-trixie-slim"
+            TAG_VERSION: "26"
+          - BASE_IMAGE: "node:26.3-trixie-slim"
+            TAG_VERSION: "26.3"
           # Node 24 (Active LTS)
           - BASE_IMAGE: "node:24-bookworm-slim"
             TAG_VERSION: "24"
