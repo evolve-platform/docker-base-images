@@ -1,23 +1,25 @@
 # Evolve docker base images
 
-Custom Node.js base images with `pnpm` (via corepack), `dumb-init`, `curl`, and `unzip` pre-installed. Built on Debian Bookworm slim and published as multi-arch (`amd64`/`arm64`) images to GitHub Container Registry.
+Custom Node.js base images with `pnpm` (via corepack), `dumb-init`, `curl`, and `unzip` pre-installed. Published as multi-arch (`amd64`/`arm64`) images to GitHub Container Registry.
 
 ## Available tags
 
-| Tag | Node.js version | Status |
-|-----|----------------|--------|
-| `24` | Latest Node 24.x | Active LTS |
-| `24.15` | 24.15.x | Active LTS |
-| `24.14` | 24.14.x | Active LTS |
-| `24.13` | 24.13.x | Active LTS |
-| `22` | Latest Node 22.x | Maintenance LTS |
-| `22.22` | 22.22.x | Maintenance LTS |
-| `22.14` | 22.14.x | Maintenance LTS |
+| Tag | Node.js version | Base image | Status |
+|-----|----------------|------------|--------|
+| `26` | Latest Node 26.x | Debian Trixie slim | Current |
+| `26.3` | 26.3.x | Debian Trixie slim | Current |
+| `24` | Latest Node 24.x | Debian Bookworm slim | Active LTS |
+| `24.15` | 24.15.x | Debian Bookworm slim | Active LTS |
+| `24.14` | 24.14.x | Debian Bookworm slim | Active LTS |
+| `24.13` | 24.13.x | Debian Bookworm slim | Active LTS |
+| `22` | Latest Node 22.x | Debian Bookworm slim | Maintenance LTS |
+| `22.22` | 22.22.x | Debian Bookworm slim | Maintenance LTS |
+| `22.14` | 22.14.x | Debian Bookworm slim | Maintenance LTS |
 
 ## Usage
 
 ```dockerfile
-FROM ghcr.io/<org>/node:24
+FROM ghcr.io/evolve-platform/node:26.3
 ```
 
 ## Authentication
