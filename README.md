@@ -7,19 +7,24 @@ Custom Node.js base images with `pnpm` (via corepack), `dumb-init`, `curl`, and 
 | Tag | Node.js version | Base image | Status |
 |-----|----------------|------------|--------|
 | `26` | Latest Node 26.x | Debian Trixie slim | Current |
-| `26.3` | 26.3.x | Debian Trixie slim | Current |
+| `26.12` | 26.12.x | Debian Trixie slim | Current |
+| `26.3` | 26.3.x | Debian Trixie slim | Frozen |
 | `24` | Latest Node 24.x | Debian Bookworm slim | Active LTS |
-| `24.15` | 24.15.x | Debian Bookworm slim | Active LTS |
-| `24.14` | 24.14.x | Debian Bookworm slim | Active LTS |
-| `24.13` | 24.13.x | Debian Bookworm slim | Active LTS |
+| `24.22` | 24.22.x | Debian Bookworm slim | Active LTS |
+| `24.15` | 24.15.x | Debian Bookworm slim | Frozen |
+| `24.14` | 24.14.x | Debian Bookworm slim | Frozen |
+| `24.13` | 24.13.x | Debian Bookworm slim | Frozen |
 | `22` | Latest Node 22.x | Debian Bookworm slim | Maintenance LTS |
-| `22.22` | 22.22.x | Debian Bookworm slim | Maintenance LTS |
-| `22.14` | 22.14.x | Debian Bookworm slim | Maintenance LTS |
+| `22.23` | 22.23.x | Debian Bookworm slim | Maintenance LTS |
+| `22.22` | 22.22.x | Debian Bookworm slim | Frozen |
+| `22.14` | 22.14.x | Debian Bookworm slim | Frozen |
+
+Node.js ships security fixes only on the newest minor of each release line, so a minor tag stops receiving them once a newer minor is out. A frozen tag still rebuilds weekly for Debian updates, but its Node.js version never gets another patch: move to the floating major tag or the newest minor.
 
 ## Usage
 
 ```dockerfile
-FROM ghcr.io/evolve-platform/node:26.3
+FROM ghcr.io/evolve-platform/node:26
 ```
 
 ## Authentication
