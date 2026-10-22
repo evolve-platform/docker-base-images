@@ -24,24 +24,18 @@ jobs:
         include:
           - BASE_IMAGE: "node:26-trixie-slim"
             TAG_VERSION: "26"
-          - BASE_IMAGE: "node:26.3-trixie-slim"
-            TAG_VERSION: "26.3"
+          - BASE_IMAGE: "node:26.12-trixie-slim"
+            TAG_VERSION: "26.13"
           # Node 24 (Active LTS)
           - BASE_IMAGE: "node:24-bookworm-slim"
             TAG_VERSION: "24"
           - BASE_IMAGE: "node:24.15-bookworm-slim"
-            TAG_VERSION: "24.15"
-          - BASE_IMAGE: "node:24.14-bookworm-slim"
-            TAG_VERSION: "24.14"
-          - BASE_IMAGE: "node:24.13-bookworm-slim"
-            TAG_VERSION: "24.13"
+            TAG_VERSION: "24.22"
           # Node 22 (Maintenance LTS)
           - BASE_IMAGE: "node:22-bookworm-slim"
             TAG_VERSION: "22"
-          - BASE_IMAGE: "node:22.22-bookworm-slim"
-            TAG_VERSION: "22.22"
           - BASE_IMAGE: "node:22.14-bookworm-slim"
-            TAG_VERSION: "22.14"
+            TAG_VERSION: "22.23"
 
     steps:
       - name: Checkout code
