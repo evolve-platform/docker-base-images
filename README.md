@@ -16,24 +16,37 @@ Custom Node.js base images with `pnpm` (via corepack), `dumb-init`, `curl`, and 
 | `22.22` | 22.22.x | Debian Bookworm slim | Maintenance LTS |
 | `22.14` | 22.14.x | Debian Bookworm slim | Maintenance LTS |
 
-## Hardened (minimal) tags
+## Hardened (minimal) tags — preview
 
-Built on [Docker Hardened Images](https://hub.docker.com/hardened-images/catalog/dhi/node) (Debian 13).
+> [!WARNING]
+> These tags are a preview. Contents and tags may change without notice. Do not use them for production workloads yet.
 
-| Tag | Use | Contents |
-|-----|-----|----------|
-| `26-min-dev` | Build stage | Runs as root. Shell, apt, npm, `pnpm`, `dumb-init`, `curl`, `unzip`. |
-| `26-min` | Runtime stage | Runs as `node` (uid 1000). No shell or package manager. Adds `dumb-init` only. |
+Built on [Docker Hardened Images](https://hub.docker.com/hardened-images/catalog/dhi/node) (Debian 13). Multi-arch (`amd64`/`arm64`).
 
-The runtime image has no shell. Use exec-form `ENTRYPOINT`/`CMD`.
+| Tag | Use | Contents | Status |
+|-----|-----|----------|--------|
+| `26-min-dev` | Build stage | Runs as root. Shell, apt, npm, `pnpm`, `dumb-init`, `curl`, `unzip`. | Preview |
+| `26-min` | Runtime stage | Runs as `node` (uid 1000). No shell or package manager. Adds `dumb-init` only. | Preview |
+
+### Usage
+
+Use `26-min-dev` to install and build. Copy only the build output into `26-min`.
+
+> [!IMPORTANT]
+> `26-min` differs from the other tags:
+> - It runs as `node` (uid 1000), not root. Copy files in with `--chown=1000:1000`, or the app cannot write to them.
+> - It has no shell. `RUN` steps fail, and shell-form `CMD`/`ENTRYPOINT` does not work. Use exec form (JSON array).
+> - The working directory is `/app`.
+> - It has no package manager. Install all dependencies in the `26-min-dev` stage.
 
 ```dockerfile
 FROM ghcr.io/evolve-platform/node:26-min-dev AS build
 WORKDIR /app
 COPY . .
-RUN pnpm install --frozen-lockfile && pnpm build
+RUN pnpm install --frozen-lockfile && pnpm build && pnpm prune --prod
 
 FROM ghcr.io/evolve-platform/node:26-min
+COPY --from=build --chown=1000:1000 /app/node_modules /app/node_modules
 COPY --from=build --chown=1000:1000 /app/dist /app/dist
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 CMD ["node", "dist/index.js"]
