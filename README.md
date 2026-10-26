@@ -16,6 +16,29 @@ Custom Node.js base images with `pnpm` (via corepack), `dumb-init`, `curl`, and 
 | `22.22` | 22.22.x | Debian Bookworm slim | Maintenance LTS |
 | `22.14` | 22.14.x | Debian Bookworm slim | Maintenance LTS |
 
+## Hardened (minimal) tags
+
+Built on [Docker Hardened Images](https://hub.docker.com/hardened-images/catalog/dhi/node) (Debian 13).
+
+| Tag | Use | Contents |
+|-----|-----|----------|
+| `26-min-dev` | Build stage | Runs as root. Shell, apt, npm, `pnpm`, `dumb-init`, `curl`, `unzip`. |
+| `26-min` | Runtime stage | Runs as `node` (uid 1000). No shell or package manager. Adds `dumb-init` only. |
+
+The runtime image has no shell. Use exec-form `ENTRYPOINT`/`CMD`.
+
+```dockerfile
+FROM ghcr.io/evolve-platform/node:26-min-dev AS build
+WORKDIR /app
+COPY . .
+RUN pnpm install --frozen-lockfile && pnpm build
+
+FROM ghcr.io/evolve-platform/node:26-min
+COPY --from=build --chown=1000:1000 /app/dist /app/dist
+ENTRYPOINT ["/usr/bin/dumb-init", "--"]
+CMD ["node", "dist/index.js"]
+```
+
 ## Usage
 
 ```dockerfile
