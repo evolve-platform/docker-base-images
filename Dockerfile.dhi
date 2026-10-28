@@ -1,0 +1,22 @@
+ARG DHI_TAG=26-debian13
+
+FROM dhi.io/node:${DHI_TAG}-dev AS dev
+
+LABEL org.opencontainers.image.source="https://github.com/labdigital-evolve/docker-base-images/"
+LABEL org.opencontainers.image.description="Docker Hardened Node.js build image with pnpm support"
+
+RUN apt-get update -y && \
+    apt-get install -y --no-install-recommends ca-certificates dumb-init curl unzip && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# DHI ships corepack already; reinstalling it clashes with its yarn shim.
+RUN corepack enable pnpm
+
+# Runtime has no shell or package manager, so only bring in the init binary.
+FROM dhi.io/node:${DHI_TAG} AS runtime
+
+LABEL org.opencontainers.image.source="https://github.com/labdigital-evolve/docker-base-images/"
+LABEL org.opencontainers.image.description="Docker Hardened Node.js runtime image"
+
+COPY --from=dev /usr/bin/dumb-init /usr/bin/dumb-init
