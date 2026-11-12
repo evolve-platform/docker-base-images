@@ -26,6 +26,8 @@ jobs:
             TAG_VERSION: "26"
           - BASE_IMAGE: "node:26.12-trixie-slim"
             TAG_VERSION: "26.12"
+          - BASE_IMAGE: "node:26.13-trixie-slim"
+            TAG_VERSION: "26.13"
           # Node 24 (Active LTS)
           - BASE_IMAGE: "node:24-bookworm-slim"
             TAG_VERSION: "24"
